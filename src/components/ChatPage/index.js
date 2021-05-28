@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import FriendsList from './FriendsList'
 import FriendChat from './FriendChat'
+import Header from '../Header'
 import './index.css'
 const initialFriendsChatList = [
     {
@@ -24,6 +25,8 @@ class ChatPage extends Component {
     render(){
         const{friendsChatList,selectedFriendId} = this.state
         return(
+            <>
+            <Header />
             <div className="chats-page-bg-container">
                 <div className="chats-container">
                     <FriendsList friendsChatList={friendsChatList} getFriendChat={this.getFriendChat}/>
@@ -49,6 +52,7 @@ class ChatPage extends Component {
                     
                 </div>
             </div>
+            </>
         )
     }
 }

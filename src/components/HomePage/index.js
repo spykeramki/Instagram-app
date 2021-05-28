@@ -2,6 +2,7 @@ import {Component} from 'react'
 import OtherUserPost from '../OtherUserPost'
 import SuggestionsBox from '../SuggestionsBox'
 import StatusBar from '../StatusBar'
+import Header from '../Header'
 import './index.css'
 const friendsPostsList=[
     {   id:0,
@@ -48,6 +49,8 @@ const friendsPostsList=[
 class HomePage extends Component {
     render(){
         return (
+            <>
+            <Header />
             <div className="home-bg-container">
                 <div className="status-posts-container">
                     <StatusBar />
@@ -59,6 +62,7 @@ class HomePage extends Component {
                 </div>
             <SuggestionsBox />
             </div>
+            </>
         )
     }
 }

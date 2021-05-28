@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import * as Icon from 'react-bootstrap-icons'
 
 import './index.css'
 
@@ -8,10 +9,10 @@ class LoginPage extends Component {
             <div className="login-page-bg-container">
                 <div className="login-page-content-container">
                     <div className="login-phone-image-container">
-                        <img src="https://res.cloudinary.com/dwlftsdge/image/upload/v1622135402/Instagram%20App/instagram%20login%20page%20images/9364675fb26a_beeizs.png" 
+                        {/* <img src="https://res.cloudinary.com/dwlftsdge/image/upload/v1622135402/Instagram%20App/instagram%20login%20page%20images/9364675fb26a_beeizs.png" 
                         className="login-phone-image" 
                         alt="login-phone"
-                        />
+                        /> */}
                     </div>
                     <div className="login-page-creds-container">
                         <div className="login-creds-inputs-container">
@@ -22,11 +23,11 @@ class LoginPage extends Component {
                                 />
                             </div>
                             <form className="inputs-form-container">
-                                <div className="username-input-container">
-                                    <input type="text" className="username-input" />
+                                <div className="login-input-container">
+                                    <input type="text" className="input" placeholder="Phone number, username, or email" />
                                 </div>
-                                <div className="password-input-container">
-                                    <input type="password" className="password-input" />
+                                <div className="login-input-container">
+                                    <input type="password" className="input" placeholder="Password" />
                                 </div>
                                 <div className="login-button-container">
                                     <button type="submit" className="login-button">Log In</button>
@@ -82,7 +83,7 @@ class LoginPage extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="login-page-footer-container">
+                <footer className="login-page-footer-container">
                     <div className="login-page-footer-links-container">
                         <p className="login-page-footer-link">About</p>
                         <p className="login-page-footer-link">Blog</p>
@@ -95,14 +96,16 @@ class LoginPage extends Component {
                         <p className="login-page-footer-link">Hashtags</p>
                         <p className="login-page-footer-link">Locations</p>
                     </div>
-                    <select className="login-page-language-selection">
-                        <option value="English" selected>English</option>
-                        <option value="Hindi" selected>Hindi</option>
-                        <option value="Tamil" selected>Tamil</option>
-                        <option value="Kanada" selected>Kanada</option>
-                    </select>
-                    <span className="login-copy-right">2021 Instagram from Facebook</span>
-                </div>
+                    <div className="copy-rights-container">
+                        <select className="login-page-language-selection">
+                            <option value="English" selected>English</option>
+                            <option value="Hindi" >Hindi</option>
+                            <option value="Tamil" >Tamil</option>
+                            <option value="Kanada" >Kanada</option>
+                        </select>
+                        <span className="login-copy-right">2021 Instagram from Facebook</span>
+                    </div>
+                </footer>
             </div> 
         )
     }

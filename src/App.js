@@ -10,7 +10,6 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Switch>
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/' component={HomePage} />
