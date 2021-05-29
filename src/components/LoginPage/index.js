@@ -1,18 +1,49 @@
 import {Component} from 'react'
-import * as Icon from 'react-bootstrap-icons'
-
 import './index.css'
 
 class LoginPage extends Component {
+    constructor(){
+        super()
+        this.gifImageUrlsList = [
+            "https://res.cloudinary.com/dwlftsdge/image/upload/v1622135385/Instagram%20App/instagram%20login%20page%20images/1_acczbw.jpg",
+            "https://res.cloudinary.com/dwlftsdge/image/upload/v1622135385/Instagram%20App/instagram%20login%20page%20images/2_o19qtx.jpg",
+            "https://res.cloudinary.com/dwlftsdge/image/upload/v1622135385/Instagram%20App/instagram%20login%20page%20images/3_rl1r2t.jpg",
+            "https://res.cloudinary.com/dwlftsdge/image/upload/v1622135385/Instagram%20App/instagram%20login%20page%20images/4_pdzcdz.jpg",
+            "https://res.cloudinary.com/dwlftsdge/image/upload/v1622135386/Instagram%20App/instagram%20login%20page%20images/5_xog2nr.jpg"
+        ]
+        this.state= { mobileImage : this.gifImageUrlsList[0] }
+    }
+
+    componentDidMount(){
+        this.changeImagesInMobile()
+    }
+
+    changeImagesInMobile = () => {
+        let count=0
+        this.gifTimerId = setInterval(() => {
+            count+=1;
+            if (count >= this.gifImageUrlsList.length){
+                count=0;
+            }
+            let newImage = this.gifImageUrlsList[count]
+            this.setState({mobileImage:newImage})
+        },4000)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.gifTimerId)
+    }
+
     render(){
+        const {mobileImage} = this.state
+
         return(
             <div className="login-page-bg-container">
                 <div className="login-page-content-container">
                     <div className="login-phone-image-container">
-                        {/* <img src="https://res.cloudinary.com/dwlftsdge/image/upload/v1622135402/Instagram%20App/instagram%20login%20page%20images/9364675fb26a_beeizs.png" 
-                        className="login-phone-image" 
-                        alt="login-phone"
-                        /> */}
+                        <div className="login-gif-image-container">
+                            <img src={mobileImage} className="login-gif-image" alt="instagram" />
+                        </div>
                     </div>
                     <div className="login-page-creds-container">
                         <div className="login-creds-inputs-container">
@@ -98,7 +129,7 @@ class LoginPage extends Component {
                     </div>
                     <div className="copy-rights-container">
                         <select className="login-page-language-selection">
-                            <option value="English" selected>English</option>
+                            <option value="English">English</option>
                             <option value="Hindi" >Hindi</option>
                             <option value="Tamil" >Tamil</option>
                             <option value="Kanada" >Kanada</option>

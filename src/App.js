@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 
 import LoginPage from './components/LoginPage'
 import HomePage from './components/HomePage'
-import Header from './components/Header'
 import ChatPage from './components/ChatPage'
 import './App.css';
 

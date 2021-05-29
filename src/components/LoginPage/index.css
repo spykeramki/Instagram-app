@@ -20,6 +20,18 @@
     width: 448px;
     height: 620px;
     background-size: cover;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.login-gif-image-container{
+    width: 244px;
+    height: 430px;
+    margin:99px 53px 0 0;
+}
+.login-gif-image{
+    height: 100%;
+
 }
 .login-page-creds-container{
     width: 330px;
