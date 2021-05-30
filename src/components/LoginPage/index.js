@@ -11,7 +11,59 @@ class LoginPage extends Component {
             "https://res.cloudinary.com/dwlftsdge/image/upload/v1622135385/Instagram%20App/instagram%20login%20page%20images/4_pdzcdz.jpg",
             "https://res.cloudinary.com/dwlftsdge/image/upload/v1622135386/Instagram%20App/instagram%20login%20page%20images/5_xog2nr.jpg"
         ]
-        this.state= { mobileImage : this.gifImageUrlsList[0] }
+        this.state= { mobileImage : this.gifImageUrlsList[0], 
+            username:'', 
+            password:'', 
+            showUsernameErrMsg: false, 
+            showPasswordErrMsg: false}
+    }
+
+    changeUsername = (event) => {
+        this.setState({username: event.target.value})
+    }
+
+    changePassword = (event) => {
+        this.setState({password: event.target.value})
+    }
+    
+    submitLoginForm = async (event) => {
+        const {username, password} = this.state
+        event.preventDefault()
+        this.validatingInputFields()
+        if (username!=='' && password!==''){
+            const userDetails = {
+                username : username,
+                password : password
+            }
+            console.log(userDetails)
+            const options={
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": 'application/json'
+                },
+                body: JSON.stringify(userDetails)
+            }
+            const response = await fetch('http://localhost:3005/login',options);
+            const data = await response.json()
+            console.log(data)
+        }
+    }
+
+    validatingInputFields = () => {
+        const {username, password} = this.state
+        if (username===''){
+            this.setState({showUsernameErrMsg: true})
+        }
+        else{
+            this.setState({showUsernameErrMsg: false})
+        }
+        if (password===''){
+            this.setState({showPasswordErrMsg: true})
+        }
+        else{
+            this.setState({showPasswordErrMsg: false})
+        }
     }
 
     componentDidMount(){
@@ -53,12 +105,12 @@ class LoginPage extends Component {
                                 alt="logo"
                                 />
                             </div>
-                            <form className="inputs-form-container">
+                            <form className="inputs-form-container" onSubmit={this.submitLoginForm}>
                                 <div className="login-input-container">
-                                    <input type="text" className="input" placeholder="Phone number, username, or email" />
+                                    <input type="text" className="input" placeholder="Phone number, username, or email" onChange={this.changeUsername} />
                                 </div>
                                 <div className="login-input-container">
-                                    <input type="password" className="input" placeholder="Password" />
+                                    <input type="password" className="input" placeholder="Password" onChange={this.changePassword}/>
                                 </div>
                                 <div className="login-button-container">
                                     <button type="submit" className="login-button">Log In</button>
