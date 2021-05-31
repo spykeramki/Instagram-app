@@ -1,4 +1,7 @@
 import {Component} from 'react'
+import {withRouter, Redirect} from 'react-router-dom'
+import Cookies from 'js-cookie'
+
 import './index.css'
 
 class LoginPage extends Component {
@@ -26,6 +29,12 @@ class LoginPage extends Component {
         this.setState({password: event.target.value})
     }
     
+    onLoginSuccess =(jwtToken) => {
+        Cookies.set('jwt_token', jwtToken)
+        const {history} = this.props
+        history.replace('/')
+    }
+
     submitLoginForm = async (event) => {
         const {username, password} = this.state
         event.preventDefault()
@@ -35,7 +44,6 @@ class LoginPage extends Component {
                 username : username,
                 password : password
             }
-            console.log(userDetails)
             const options={
                 method: 'POST',
                 headers: {
@@ -45,8 +53,13 @@ class LoginPage extends Component {
                 body: JSON.stringify(userDetails)
             }
             const response = await fetch('http://localhost:3005/login',options);
-            const data = await response.json()
-            console.log(data)
+            if(response.ok===true){
+                const data = await response.json()
+                this.onLoginSuccess(data.jwt_token)
+            }
+            else{
+                console.log(response)
+            }
         }
     }
 
@@ -88,6 +101,10 @@ class LoginPage extends Component {
 
     render(){
         const {mobileImage} = this.state
+        const jwt_token = Cookies.get('jwt_token')
+        if(jwt_token !==undefined){
+            return <Redirect to='/' />
+        }
 
         return(
             <div className="login-page-bg-container">
@@ -194,4 +211,4 @@ class LoginPage extends Component {
     }
 }
 
-export default LoginPage
+export default withRouter(LoginPage)

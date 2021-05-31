@@ -2,6 +2,7 @@ import {Component} from 'react'
 import FriendsList from './FriendsList'
 import FriendChat from './FriendChat'
 import Header from '../Header'
+import PopupButton from './PopupButton'
 import './index.css'
 const initialFriendsChatList = [
     {
@@ -44,9 +45,7 @@ class ChatPage extends Component {
                         <p className="chat-intro-description">
                             Send private photos and messages to a friend or a group
                         </p>
-                        <button type="button" className="send-message-button">
-                            Send Message
-                        </button>
+                        <PopupButton />
                     </div>
                     )}
                     
