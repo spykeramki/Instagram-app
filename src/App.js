@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 import LoginPage from './components/LoginPage'
 import HomePage from './components/HomePage'
 import ChatPage from './components/ChatPage'
+import ProtectedRoute from './components/ProtectedRoute'
 import './App.css';
 
 function App() {
@@ -11,8 +12,8 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path='/login' component={LoginPage} />
-        <Route exact path='/' component={HomePage} />
-        <Route exact path='/inbox' component={ChatPage} />
+        <ProtectedRoute exact path='/' component={HomePage} />
+        <ProtectedRoute exact path='/inbox' component={ChatPage} />
       </Switch>
     </BrowserRouter>
   );

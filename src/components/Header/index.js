@@ -1,6 +1,8 @@
 import {Link} from 'react-router-dom'
 import * as Icon from 'react-bootstrap-icons';
 import {Component} from 'react'
+import ProfileIconPopup from './ProfileIconPopup'
+import NotificationsPopup from './NotificationsPopup'
 
 import './index.css'
 
@@ -27,13 +29,8 @@ class Header extends Component {
                         <div className="nav-link">
                             <Icon.Compass color="#000000" size={24} />
                         </div>
-                        <div className="nav-link">
-                            <Icon.Heart color="#000000" size={24} />
-                        </div>
-                        <img src="https://res.cloudinary.com/dwlftsdge/image/upload/v1620653719/Instagram%20App/download_mqntpw.jpg" 
-                        className="header-profile-image" 
-                        alt="profile-pic"
-                        />
+                        <NotificationsPopup />
+                        <ProfileIconPopup />
                     </div>
                 </nav>
             </div>

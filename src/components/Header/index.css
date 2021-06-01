@@ -14,6 +14,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding-right: 16px;
 }
 .logo-container{
     width: 30%;
@@ -44,9 +45,4 @@
 .nav-link{
     margin-left: 24px;
 }
-.header-profile-image{
-    width: 24px;
-    height: 24px;
-    border-radius: 12px;
-    margin-left: 24px;
-}
+
