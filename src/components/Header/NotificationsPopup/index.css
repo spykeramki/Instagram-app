@@ -1,0 +1,24 @@
+.notifications-popup-content {
+    background-color: #ffffff;
+    border-radius: 8px;
+    width: 480px;
+    max-height: 300px;
+    padding-top: 0;
+  }
+  .notifications-popup-arrow {
+    color: #ffffff;
+    stroke-width: 1px;
+    stroke: #dbdbdb;
+    stroke-dasharray: 30px;
+  }
+  [role='tooltip'].notifications-popup-content {
+    width: 480px;
+    box-shadow: 0 0 5px 1px rgb(224, 224, 224);
+  }
+  
+  .notifications-popup-overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  [data-popup='tooltip'].notifications-popup-overlay {
+    background: transparent;
+  }

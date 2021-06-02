@@ -155,7 +155,7 @@ class LoginPage extends Component {
                         </div>
                         <div className="sign-up-text-container">
                             <p className="sign-up-description">
-                                Don't have an account? <span className="sign-up-text">Sign up</span>
+                                Don't have an account? <a className="sign-up-text" href="http://localhost:3004/signup">Sign up</a>
                             </p>
                         </div>
                         <div className="install-app-stores-links-container">

@@ -45,24 +45,24 @@
     font-weight: 400;
     margin: 0;
 }
-.popup-content {
+.header-profile-image-popup-content {
     background-color: #ffffff;
     border-radius: 8px;
     width: 220px;
     padding-top: 0;
   }
-  .popup-arrow {
+  .header-profile-image-popup-arrow {
     color: #ffffff;
     stroke-width: 1px;
     stroke: #dbdbdb;
     stroke-dasharray: 30px;
   }
-  [role='tooltip'].popup-content {
+  [role='tooltip'].header-profile-image-popup-content {
     width: 220px;
     box-shadow: 0 0 5px 1px rgb(224, 224, 224);
   }
   
-  .popup-overlay {
+  .header-profile-image-popup-overlay {
     background: rgba(0, 0, 0, 0.5);
   }
   [data-popup='tooltip'].popup-overlay {

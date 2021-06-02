@@ -12,6 +12,7 @@ const ProfileIconPopup = (props) => {
     }
     return (
         <Popup 
+        className="header-profile-image-popup"
         trigger={<img src="https://res.cloudinary.com/dwlftsdge/image/upload/v1620653719/Instagram%20App/download_mqntpw.jpg" 
         className="header-profile-image" 
         alt="profile-pic"
