@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import EachFriend from './EachFriend';
 import * as Icon from 'react-bootstrap-icons';
+import PopupButton from '../PopupButton'
 
 import './index.css'
 
@@ -17,9 +18,7 @@ class FriendsList extends Component {
                         </h1>
                         <Icon.CaretDown color="#262626" size={20} />
                     </div>
-                    <div className="friend-chat-search-container">
-                        <Icon.PencilSquare color="#262626" size={24} />
-                    </div>
+                    <PopupButton type="icon" />
                 </div>
                 <nav className="chats-all-types-nav-container">
                     <div className="chats-type-heading-container chats-type-heading-selected" href="" tabIndex="0">

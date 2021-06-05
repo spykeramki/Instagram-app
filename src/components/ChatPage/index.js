@@ -45,7 +45,7 @@ class ChatPage extends Component {
                         <p className="chat-intro-description">
                             Send private photos and messages to a friend or a group
                         </p>
-                        <PopupButton />
+                        <PopupButton type='button' />
                     </div>
                     )}
                     

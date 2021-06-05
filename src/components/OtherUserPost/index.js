@@ -80,7 +80,7 @@ class OtherUserPost extends Component {
                 <div className="text-content-container">
                     <p className="post-description sub-heading-description">{likes} likes</p>
                     <p className="post-description view-all-comments comment-padding">View all {commentsNumber} comments</p>
-                    {this.appendComments()}
+                    {/* {this.appendComments()} */}
                     <p className="post-time">{friendPostTime}</p>
                 </div>
                 <form className="add-comment-section">

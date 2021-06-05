@@ -2,10 +2,16 @@ import Popup from 'reactjs-popup'
 import * as Icon from 'react-bootstrap-icons'
 import './index.css'
 
-const PopupButton = () => {
+const PopupButton = (props) => {
+    const{type} = props
     return (
         <Popup 
-        trigger={<button type="button" className="send-message-button">Send Message</button>}
+        trigger={type==='button' ? (<button type="button" className="send-message-button">Send Message</button>) : (
+            <div className="friend-chat-search-container">
+                <Icon.PencilSquare color="#262626" size={24} />
+            </div>
+        )}
+        className="new-message"
         modal
         nested
         >
