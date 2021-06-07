@@ -74,10 +74,10 @@ class HomePage extends Component {
                     friendName: eachItem.friend_name,
                     postContent: eachItem.post_content,
                     likes: 202,
-                    friendPostTime: eachItem.friend_post_time
+                    friendPostTime: eachItem.friend_post_time,
+                    user:eachItem.user
                 }
             })
-            console.log(updatedData)
             this.setState({friendsPostsList: updatedData})
         }
         else{

@@ -1,0 +1,28 @@
+.home-page-more-options-overlay{
+    background-color: #000000a1 !important;
+}
+.home-page-post-options-container{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.home-page-post-option-red{
+    border:0;
+    border-bottom: 1px solid #dbdbdb;
+    color: #ED4956;
+    padding: 15px;
+    width: 100%;
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+}
+.home-page-post-option{
+    border:0;
+    border-bottom: 1px solid #dbdbdb;
+    color: #262626;
+    padding: 15px;
+    width: 100%;
+    font-weight: 500;
+}
