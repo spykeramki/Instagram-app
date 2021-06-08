@@ -61,11 +61,15 @@ class OtherUserPost extends Component {
     appendComments = () =>{
         const{commentsList} = this.state
         const no_of_comments = commentsList.length
+        let slicedArray = commentsList
+        if (no_of_comments > 2){
+            slicedArray = commentsList.slice(0,2)
+        }
         return (
                 <>
                     {no_of_comments>2 ?<p className="post-description view-all-comments comment-padding">View all {no_of_comments} comments</p>:''}
                     <ul className="comments-container">
-                        {commentsList.map(eachComment => {
+                        {slicedArray.map(eachComment => {
                         return (
                                 <li className="post-description sub-heading-description comment-padding" key={eachComment.id}>{eachComment.commenters} <span className="comment-value">{eachComment.comment}</span></li>
                         )

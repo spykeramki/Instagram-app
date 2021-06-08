@@ -3,6 +3,7 @@ import * as Icon from 'react-bootstrap-icons';
 import {Component} from 'react'
 import ProfileIconPopup from './ProfileIconPopup'
 import NotificationsPopup from './NotificationsPopup'
+import SearchInputPopup from './SearchInputPopup'
 
 import './index.css'
 
@@ -17,7 +18,7 @@ class Header extends Component {
                         </Link>
                     </div>
                     <div className="search-input-container">
-                        <input type="search" placeholder="Search" className="search-input" />
+                        <SearchInputPopup />
                     </div>
                     <div className="nav-links-container">
                         <Link className="nav-link" to='/'>
