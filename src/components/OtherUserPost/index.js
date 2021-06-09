@@ -8,7 +8,19 @@ import './index.css';
 class OtherUserPost extends Component {
     constructor(props){
         super()
-        this.state = {friendPost:props.friendPost, commentsList:[], postCreatedTime:'now'}
+        this.state = {friendPost:props.friendPost, commentsList:[], postCreatedTime:'now', liked:false, saved:false}
+    }
+
+    changeSavedStatus = () => {
+        this.setState(prevState => {
+            return {saved: !prevState.saved}
+        })
+    }
+
+    changeLikeStatus = () => {
+        this.setState(prevState => {
+            return {liked: !prevState.liked}
+        })
     }
 
     displayPostTime = () => {
@@ -63,7 +75,7 @@ class OtherUserPost extends Component {
         const no_of_comments = commentsList.length
         let slicedArray = commentsList
         if (no_of_comments > 2){
-            slicedArray = commentsList.slice(0,2)
+            slicedArray = commentsList.slice(no_of_comments-2,no_of_comments)
         }
         return (
                 <>
@@ -80,7 +92,7 @@ class OtherUserPost extends Component {
     }
 
     render(){
-        const {friendPost} = this.state
+        const {friendPost, liked, saved} = this.state
         const {friendProfileImage, friendName, postContent, likes} = friendPost
         return(
             <div className="post-container">
@@ -101,8 +113,8 @@ class OtherUserPost extends Component {
                 alt="postImage"
                 />
                 <div className="post-icons-container">
-                    <div className="icon-conteiner">
-                        <Icon.Heart color="#000000" size={24} />
+                    <div className="icon-conteiner" role="button" tabIndex={0} onClick={this.changeLikeStatus}>
+                        {liked ? <Icon.HeartFill color="#ed4956" size={24} /> : <Icon.Heart color="#000000" size={24} />}
                     </div>
                     <div className="icon-conteiner">
                     <Icon.Chat color="#000000" size={24} />
@@ -110,8 +122,9 @@ class OtherUserPost extends Component {
                     <div className="icon-conteiner">
                     <Icon.ArrowUpRightCircle color="#000000" size={24} />
                     </div>
-                    <div className="icon-conteiner right-align">
-                    <Icon.Bookmark color="#000000" size={24} />
+                    <div className="icon-conteiner right-align" role="button" tabIndex={0} onClick={this.changeSavedStatus}>
+                        {saved ? <Icon.BookmarkFill color="#000000" size={24} /> : <Icon.Bookmark color="#000000" size={24} />}
+                    
                     </div>
                 </div>
                 <div className="text-content-container">
