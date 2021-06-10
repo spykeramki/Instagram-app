@@ -71,3 +71,7 @@
     justify-content: space-between;
     align-items: center;
 }
+.home-page-post-selected-question-close-icon{
+    border: 0;
+    outline: 0;
+}

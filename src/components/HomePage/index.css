@@ -3,21 +3,37 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 92vh;
+    height: max-content;
 }
 .status-posts-container{
     width: 60%;
     max-width: 600px;
     align-items: center;
-    overflow-y: auto;
     margin-right: 32px;
 }
 .friends-posts-container{
     list-style-type: none;
     padding: 0;
-    height: 100%;
 }
+/* Designing for scroll-bar */
 ::-webkit-scrollbar {
-    width: 0;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
+    width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: gainsboro;
+    border-radius: 5px;
+    position: absolute;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

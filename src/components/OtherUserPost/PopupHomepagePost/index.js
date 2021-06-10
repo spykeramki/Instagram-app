@@ -22,7 +22,7 @@ const PopupHomepagePost = () => {
                             <div className = "home-page-post-selected-heading-container">
                                 <div className="home-page-post-selected-question-empty-container"></div>
                                 <p className="home-page-post-selected-question">Report</p>
-                                <div role="button" tabIndex={0} onClick={close}>{<Icon.XLg color="#262626" size={20}/>}</div>
+                                <div className="home-page-post-selected-question-close-icon" role="button" tabIndex={0} onClick={close}>{<Icon.XLg color="#262626" size={20}/>}</div>
                             </div>
                             <div className = "home-page-post-selected-question-container">
                                 <p className="home-page-post-selected-question">Why are you reporting this post?</p>
