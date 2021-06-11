@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: max-content;
 }
 .status-posts-container{
     width: 60%;

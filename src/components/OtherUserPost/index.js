@@ -8,16 +8,37 @@ import './index.css';
 class OtherUserPost extends Component {
     constructor(props){
         super()
-        this.state = {friendPost:props.friendPost, commentsList:[], postCreatedTime:'now', liked:false, saved:false}
+        this.state = {
+            friendPost:props.friendPost, 
+            commentsList:[], 
+            ostCreatedTime:'now', 
+            liked:false, 
+            likes:props.friendPost.likes, 
+            saved:false
+        }
     }
 
     changeSavedStatus = () => {
+        //write API call to add saved status to post in database
         this.setState(prevState => {
             return {saved: !prevState.saved}
         })
     }
 
     changeLikeStatus = () => {
+        const {liked} = this.state
+        if (!liked){
+            //write API call to add a like to database
+            this.setState(prevState => {
+                return {likes: prevState.likes+1}
+            })
+        }
+        else {
+            //write API call to remove a like to database
+            this.setState(prevState => {
+                return {likes: prevState.likes-1}
+            })
+        }
         this.setState(prevState => {
             return {liked: !prevState.liked}
         })
@@ -36,6 +57,7 @@ class OtherUserPost extends Component {
         const{friendPost,commentsList} = this.state
         const updatedCommentList = commentsList
         if (event.key==="Enter"){
+            //write API call to add comment in database
             const comment={
                 id: updatedCommentList.length + 1,
                 commenters: friendPost.user,
@@ -46,6 +68,8 @@ class OtherUserPost extends Component {
             event.target.value=""
         }
     }
+
+    //write function and API call to delete comment in database
 
     componentDidMount(){
         this.getCommentsList()
@@ -92,8 +116,8 @@ class OtherUserPost extends Component {
     }
 
     render(){
-        const {friendPost, liked, saved} = this.state
-        const {friendProfileImage, friendName, postContent, likes} = friendPost
+        const {friendPost, liked, saved, likes} = this.state
+        const {friendProfileImage, friendName, postContent} = friendPost
         return(
             <div className="post-container">
                 <div className="user-details-container">

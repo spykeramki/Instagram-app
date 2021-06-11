@@ -10,6 +10,12 @@ const ProfileIconPopup = (props) => {
         const {history} = props
         history.replace('/login')
     }
+
+    const openProfile = () => {
+        const {history} = props
+        history.push('/spykeramki')
+    }
+
     return (
         <Popup 
         className="header-profile-image-popup"
@@ -21,7 +27,7 @@ const ProfileIconPopup = (props) => {
         >
             <div className="profile-icon-dropdown">
                 <ul className="profile-icon-options-container">
-                    <li className="profile-icon-option">
+                    <li className="profile-icon-option" role="button" tabIndex={0} onClick={openProfile}>
                         <div className="profile-icon-option-icon">
                             <Icon.Person color="#262626" size={18} />
                         </div>

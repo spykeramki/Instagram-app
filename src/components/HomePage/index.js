@@ -32,7 +32,7 @@ class HomePage extends Component {
                     friendProfileImage: eachItem.friend_profile_image,
                     friendName: eachItem.friend_name,
                     postContent: eachItem.post_content,
-                    likes: 202,
+                    likes: eachItem.likes,
                     friendPostTime: eachItem.friend_post_time,
                     user:eachItem.user
                 }
