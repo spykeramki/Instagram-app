@@ -3,14 +3,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh;
+}
+.profile-page-content-container{
+    width: 100%;
+    max-width: 935px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .profile-info-container{
     width: 100%;
-    max-width: 935px;
-    margin-top: 100px;
+    margin: 100px 8px 40px;
     display: flex;
     flex-direction: row;
-    margin-bottom: 40px;
 }
 .profile-page-profile-picture-container{
     width: 150px;
@@ -75,14 +81,14 @@
 }
 .profile-page-my-statuses-container{
     width: 100%;
-    max-width: 935px;
+    margin: 0 0 0 16px;
+    padding: 0 40px;
 }
 .profile-page-statuses-list-container{
     list-style-type: none;
     padding: 0;
     display: flex;
     flex-direction: row;
-    margin-left: 48px;
 }
 .profile-page-status-container{
     margin-right: 24px;
@@ -118,6 +124,7 @@
     justify-content: center;
     align-items: center;
     border-top: 1px solid #dbdbdb;
+    margin: 0 8px;
 }
 .profile-page-nav-link{
     display: flex;
@@ -135,6 +142,12 @@
     font-weight: 500;
     letter-spacing: 1px;
 }
+.profile-page-posts-list-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
 .profile-page-posts-container{
     list-style-type: none;
     padding: 0;
@@ -142,9 +155,12 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
 }
 .profile-page-post-item{
-    width: 200px;
-    height: 200px;
-    background-size: cover;
+    width: 30%;
+    margin: 15px;
+}
+.profile-page-post{
+    padding: 50%;
 }
