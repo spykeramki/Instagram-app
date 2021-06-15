@@ -13,7 +13,7 @@ const ProfileIconPopup = (props) => {
 
     const openProfile = () => {
         const {history} = props
-        history.push('/spykeramki')
+        history.push('/owner')
     }
 
     return (

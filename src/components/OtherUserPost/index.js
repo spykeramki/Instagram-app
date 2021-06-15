@@ -3,6 +3,7 @@ import * as Icon from 'react-bootstrap-icons';
 import Cookies from 'js-cookie'
 import moment from 'moment'
 import PopupHomepagePost from './PopupHomepagePost'
+import SendPostAsMessagePopup from './SendPostAsMessagePopup'
 import './index.css';
 
 class OtherUserPost extends Component {
@@ -212,7 +213,7 @@ class OtherUserPost extends Component {
                     <Icon.Chat color="#000000" size={24} />
                     </div>
                     <div className="icon-conteiner">
-                    <Icon.ArrowUpRightCircle color="#000000" size={24} />
+                        <SendPostAsMessagePopup />
                     </div>
                     <div className="icon-conteiner right-align" role="button" tabIndex={0} onClick={this.changeSavedStatus}>
                         {saved ? <Icon.BookmarkFill color="#000000" size={24} /> : <Icon.Bookmark color="#000000" size={24} />}

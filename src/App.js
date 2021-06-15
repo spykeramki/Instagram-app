@@ -17,7 +17,7 @@ function App() {
         <Route exact path='/login' component={LoginPage} />
         <ProtectedRoute exact path='/' component={HomePage} />
         <ProtectedRoute exact path='/inbox' component={ChatPage} />
-        <ProtectedRoute exact path='/spykeramki' component={ProfilePage} />
+        <ProtectedRoute exact path='/owner' component={ProfilePage} />
       </Switch>
     </BrowserRouter>
   );

@@ -1,32 +1,66 @@
 import {Component} from 'react'
 import * as Icon from 'react-bootstrap-icons'
 import Header from '../Header'
+import Cookies from 'js-cookie'
 import ProfilePostComponent from './ProfilePostComponent'
 import './index.css'
 
-const profilePageInfo = 
-    {
-        id:1,
-        selfProfileImageUrl:'https://res.cloudinary.com/dwlftsdge/image/upload/v1620653719/Instagram%20App/download_mqntpw.jpg',
-        petName:'spykeramki',
-        postsCount: 19,
-        followersCount: 179,
-        followingCount: 328,
-        fullName: 'Rama Krishna Oguri'
-    }
-const ProfilePosts = [
-    {
-        postId:1,
-        postImageUrl:'https://res.cloudinary.com/dwlftsdge/image/upload/v1622907681/Instagram%20App/Nature%20images/paris-city-landscape-france-eiffel-tower_49537-226_l2nzno.jpg',
-    },
-    {
-        postId:2,
-        postImageUrl:'https://res.cloudinary.com/dwlftsdge/image/upload/v1622907681/Instagram%20App/Nature%20images/paris-city-landscape-france-eiffel-tower_49537-226_l2nzno.jpg',
-    }
-]
-
 class ProfilePage extends Component {
-    state = {profilePageUserDetails: profilePageInfo, postsInfo:ProfilePosts}
+    state = {profilePageUserDetails: [], postsInfo:[]}
+
+    componentDidMount(){
+        this.getOwnerDetails()
+        this.getOwnerPosts()
+    }
+
+    getOwnerDetails = async () => {
+        const jwtToken = Cookies.get('jwt_token')
+        const options = {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                Authorization: `Bearer ${jwtToken}`
+            }
+        }
+        const response = await fetch('http://localhost:3005/owner',options)
+        if (response.ok===true){
+            const fetchedData = await response.json()
+            const ownerDetails = {
+                id: fetchedData.user_id,
+                selfProfileImageUrl: fetchedData.profile_picture,
+                petName: fetchedData.pet_name,
+                postsCount: fetchedData.posts,
+                followersCount: fetchedData.followers,
+                followingCount: fetchedData.following,
+                fullName: fetchedData.full_name.toUpperCase()
+            }
+            this.setState({profilePageUserDetails:ownerDetails})
+        }
+    }
+
+    getOwnerPosts = async () => {
+        const jwtToken = Cookies.get('jwt_token')
+        const options = {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                Authorization: `Bearer ${jwtToken}`
+            }
+        }
+        const response = await fetch('http://localhost:3005/owner/posts',options)
+        if (response.ok===true){
+            const fetchedData = await response.json()
+            const postsDetails = fetchedData.data.map(eachItem => {
+                return {
+                    postId: eachItem.post_id,
+                    postType: eachItem.post_type,
+                    postImageUrl: eachItem.post_url,
+                    postCreatedTime: eachItem.post_created_time
+                }
+            })
+            this.setState({postsInfo:postsDetails})
+        }
+    }
 
     render(){
         const{profilePageUserDetails, postsInfo} = this.state
