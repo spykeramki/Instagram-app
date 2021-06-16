@@ -4,6 +4,7 @@ import OtherUserPost from '../OtherUserPost'
 import SuggestionsBox from '../SuggestionsBox'
 import StatusBar from '../StatusBar'
 import Header from '../Header'
+import CreatePostPopup from './CreatePostPopup'
 import './index.css'
 
 class HomePage extends Component {
@@ -53,6 +54,19 @@ class HomePage extends Component {
             <div className="home-bg-container">
                 <div className="status-posts-container">
                     <StatusBar />
+                    <div className="create-post-container">
+                        <div className="create-post-search-container">
+                            <div className="create-post-image-container">
+                                <img src='https://res.cloudinary.com/dwlftsdge/image/upload/v1623776629/Instagram%20App/instagram%20login%20page%20images/307779-P800TT-551_gdhglg.jpg' 
+                                className="create-post-image" 
+                                alt="post" />
+                            </div>
+                            <input type="text" className="create-post-input" placeholder="How's your day?" />
+                        </div>
+                        <div className="create-post-select-container">
+                            <CreatePostPopup />
+                        </div>
+                    </div>
                     <ul className="friends-posts-container">
                         {friendsPostsList.map(eachPost => {
                             return <OtherUserPost friendPost={eachPost} key={eachPost.id}/>
