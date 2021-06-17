@@ -19,8 +19,32 @@ class OtherUserPost extends Component {
         }
     }
 
-    changeSavedStatus = () => {
-        //write API call to add saved status to post in database
+    changeSavedStatus = async () => {
+        const{friendPost} = this.props
+        const{id} = friendPost
+        const jwtToken = Cookies.get('jwt_token');
+        const presentDate = new Date()
+        const savedPostDetails = {
+            savedTime : `${presentDate.getFullYear()}-${presentDate.getMonth() + 1}-${presentDate.getDate()} ${presentDate.getHours()}:${presentDate.getMinutes()}:${presentDate.getSeconds()}`
+        }
+        
+        const options={
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": 'application/json',
+                authorization: `Bearer ${jwtToken}`,
+            },
+            body: JSON.stringify(savedPostDetails)
+        }
+        const response = await fetch(`http://localhost:3005/home/posts/${id}/saved`, options)
+        if (response.ok===true){ 
+            console.log("save success")
+        }
+        else {
+            console.log('save failure')
+            
+        }
         this.setState(prevState => {
             return {saved: !prevState.saved}
         })
@@ -123,6 +147,7 @@ class OtherUserPost extends Component {
     componentDidMount(){
         this.getCommentsList()
         this.isPostLiked()
+        this.isPostSaved()
     }
 
     getCommentsList = async () => {
@@ -160,6 +185,25 @@ class OtherUserPost extends Component {
         if (response.ok===true){
             const dataFetched=await response.json()
             this.setState({liked: dataFetched.liked})
+        }
+    }
+
+    isPostSaved = async () => {
+        const{friendPost} = this.props
+        const{id} = friendPost
+        const jwtToken = Cookies.get('jwt_token');
+        const options = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": 'application/json',
+                authorization: `Bearer ${jwtToken}`,
+            },
+        }
+        const response = await fetch(`http://localhost:3005/home/post/${id}/saved`, options);
+        if (response.ok===true){
+            const dataFetched=await response.json()
+            this.setState({saved: dataFetched.saved})
         }
     }
 

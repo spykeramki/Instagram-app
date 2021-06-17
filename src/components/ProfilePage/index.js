@@ -62,6 +62,30 @@ class ProfilePage extends Component {
         }
     }
 
+    getSavedPosts = async () => {
+        const jwtToken = Cookies.get('jwt_token')
+        const options = {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                Authorization: `Bearer ${jwtToken}`
+            }
+        }
+        const response = await fetch('http://localhost:3005/owner/saved',options)
+        if (response.ok===true){
+            const fetchedData = await response.json()
+            const savedPostsDetails = fetchedData.data.map(eachItem => {
+                return {
+                    postId: eachItem.post_id,
+                    postType: eachItem.post_type,
+                    postImageUrl: eachItem.post_url,
+                    postCreatedTime: eachItem.post_created_time
+                }
+            })
+            this.setState({postsInfo:savedPostsDetails})
+        }
+    }
+
     render(){
         const{profilePageUserDetails, postsInfo} = this.state
         const{selfProfileImageUrl, petName, postsCount, followersCount, followingCount, fullName} = profilePageUserDetails
@@ -112,7 +136,7 @@ class ProfilePage extends Component {
                         </ul>
                     </div>
                     <nav className="profile-page-nav-links-container">
-                        <div className="profile-page-nav-link">
+                        <div className="profile-page-nav-link" role="button" tabIndex={0} onClick={this.getOwnerPosts}>
                             <div className="profile-page-nav-link-icon-container">
                                 <Icon.Grid3x3 color="#8e8e8e" size={12} />
                             </div>
@@ -124,7 +148,7 @@ class ProfilePage extends Component {
                             </div>
                             <span className="profile-page-nav-link-name">IGTV </span>
                         </div>
-                        <div className="profile-page-nav-link">
+                        <div className="profile-page-nav-link" role="button" tabIndex={0} onClick={this.getSavedPosts}>
                             <div className="profile-page-nav-link-icon-container">
                                 <Icon.Bookmark color="#8e8e8e" size={12} />
                             </div>

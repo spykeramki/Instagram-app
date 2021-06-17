@@ -131,6 +131,7 @@
     flex-direction: row;
     align-items: center;
     padding: 20px 28px;
+    cursor: pointer;
 }
 .profile-page-nav-link-icon-container{
     margin-right: 6px;
