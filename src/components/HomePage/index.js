@@ -8,10 +8,34 @@ import CreatePostPopup from './CreatePostPopup'
 import './index.css'
 
 class HomePage extends Component {
-    state={friendsPostsList:[]}
+    state={friendsPostsList:[], userData:[]}
 
     componentDidMount(){
         this.getPostsData()
+        this.getOwnerData()
+    }
+
+    getOwnerData = async () => {
+        const jwtToken = Cookies.get('jwt_token');
+        const options = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": 'application/json',
+                authorization: `Bearer ${jwtToken}`,
+            },
+        }
+        const response = await fetch("http://localhost:3005/owner/info", options);
+        if(response.ok===true){
+            const dataFetched = await response.json()
+            const formattedData= {
+                    userId: dataFetched.user_id,
+                    profileImageUrl: dataFetched.profile_image_url,
+                    petName: dataFetched.pet_name,
+                    fullName: dataFetched.full_name
+                }
+            this.setState({userData:formattedData})
+        }
     }
 
     getPostsData = async () => {
@@ -47,7 +71,9 @@ class HomePage extends Component {
     }
 
     render(){
-        const {friendsPostsList} = this.state
+        const {friendsPostsList, userData} = this.state
+        const{profileImageUrl, fullName, petName} = userData
+    
         return (
             <>
             <Header />
@@ -73,7 +99,20 @@ class HomePage extends Component {
                         })}
                     </ul>
                 </div>
-            <SuggestionsBox />
+                <div className="suggestions-bg-container">
+                    <div className="profile-container">
+                        <img src={profileImageUrl}
+                        className="suggestions-self-profile-image" 
+                        alt="self-profile-pic" 
+                        />
+                        <div className="name-container">
+                            <p className="nickname">{petName}</p>
+                            <p className="full-name">{fullName}</p>
+                        </div>
+                        <p className="anchor-element">Switch</p>
+                    </div>
+                    <SuggestionsBox />
+                </div>
             </div>
             </>
         )

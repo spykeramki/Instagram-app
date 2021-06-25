@@ -1,6 +1,7 @@
 
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 
+import SpecifiedUserPostDetailedPage from './components/SpecifiedUserPostDetailedPage'
 import LoginPage from './components/LoginPage'
 import HomePage from './components/HomePage'
 import ChatPage from './components/ChatPage'
@@ -18,6 +19,7 @@ function App() {
         <ProtectedRoute exact path='/' component={HomePage} />
         <ProtectedRoute exact path='/inbox' component={ChatPage} />
         <ProtectedRoute exact path='/owner' component={ProfilePage} />
+        <ProtectedRoute exact path='/posts/:id' component={SpecifiedUserPostDetailedPage} />
       </Switch>
     </BrowserRouter>
   );

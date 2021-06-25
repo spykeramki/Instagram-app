@@ -1,0 +1,140 @@
+.specified-post-container{
+    background-color: #fafafa;
+    border: 1px solid #dbdbdb;
+    margin-bottom: 24px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    max-width: 815px;
+    max-height: 600px;
+    margin-top: 104px;
+}
+.specified-post-image-container{
+    border-right: 1px solid #dbdbdb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.specified-post-image{
+    width: 100%;
+}
+.specified-post-user-content-container{
+    width:335px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+.specified-post-user-details-container{
+    padding: 16px 16px;
+    min-height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #dbdbdb;
+    flex: 0.05;
+}
+.specified-post-profile-image{
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+}
+.specified-post-user-name{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    color:#262626;
+    font-weight: 600 !important;
+    margin-left: 16px;
+}
+.specified-post-text-content-container{
+    padding-left: 16px;
+    border-bottom: 1px solid #dbdbdb;
+    flex: 0.9;
+    overflow: auto;
+}
+.specified-post-icons-container{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: auto;
+}
+.specified-post-icon-container{
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.specified-post-right-align{
+    margin-left: auto;
+}
+.specified-post-likes-container{
+    padding: 0 16px;
+}
+.specified-post-likes-description{
+    margin: 0;
+    margin-bottom: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    color: #262626;
+    font-weight: 600;
+}
+.specified-post-time-container{
+    padding: 0 16px;
+}
+.specified-post-time{
+    margin: 0;
+    margin-bottom: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 11px;
+    margin-top: 4px;
+    color: #8e8e8e;
+}
+.specified-post-view-all-comments{
+    color: #8e8e8e;
+    font-weight: 600;
+}
+.specified-post-comment-value{
+    font-weight: normal;
+}
+.specified-post-comment-padding{
+    margin-bottom: 4px;
+}
+
+.specified-post-add-comment-section{
+    margin: 0;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-top: 1px solid #efefef;
+}
+.specified-post-comment-input{
+    border: 0;
+    margin-left: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    color: #262626;
+    outline: 0;
+    resize:none;
+    width: 100%;
+    line-height: 18px;
+    background-color: transparent;
+}
+.specified-post-comments-container{
+    list-style-type: none;
+    padding: 0;
+    margin-top: 4px;
+}
+.specified-post-content-footer{
+    flex: 0.1;
+}
+.specified-post-description{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    color: #262626;
+    font-weight: 600;
+    margin-bottom: 8px;
+}

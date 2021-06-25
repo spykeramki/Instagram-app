@@ -1,19 +1,17 @@
 import {Component} from 'react';
-import {Link} from 'react-router-dom'
 import * as Icon from 'react-bootstrap-icons';
 import Cookies from 'js-cookie'
 import moment from 'moment'
-import PopupHomepagePost from './PopupHomepagePost'
-import SendPostAsMessagePopup from './SendPostAsMessagePopup'
+import PopupHomepagePost from '../PopupHomepagePost'
+import SendPostAsMessagePopup from '../SendPostAsMessagePopup'
 import './index.css';
 
-class OtherUserPost extends Component {
+class SpecifiedUserPost extends Component {
     constructor(props){
         super()
         this.state = {
             friendPost:props.friendPost, 
-            commentsList:[], 
-            ostCreatedTime:'now', 
+            commentsList:[],
             liked:false, 
             likes:props.friendPost.likes, 
             saved:false
@@ -210,75 +208,75 @@ class OtherUserPost extends Component {
 
     appendComments = () =>{
         const{commentsList} = this.state
-        const no_of_comments = commentsList.length
-        let slicedArray = commentsList
-        if (no_of_comments > 2){
-            slicedArray = commentsList.slice(no_of_comments-2,no_of_comments)
-        }
         return (
-                <>
-                    {no_of_comments>2 ?<p className="post-description view-all-comments comment-padding">View all {no_of_comments} comments</p>:''}
-                    <ul className="comments-container">
-                        {slicedArray.map(eachComment => {
-                        return (
-                                <li className="post-description sub-heading-description comment-padding" key={eachComment.id}>{eachComment.commenters} <span className="comment-value">{eachComment.comment}</span></li>
-                        )
-                        })}     
-                    </ul>
-                </>
+                <ul className="specified-post-comments-container">
+                    {commentsList.map(eachComment => {
+                    return (
+                            <li className="specified-post-description specified-post-comment-padding" key={eachComment.id}>{eachComment.commenters} <span className="comment-value">{eachComment.comment}</span></li>
+                    )
+                    })}     
+                </ul>
             )
     }
 
     render(){
         const {friendPost, liked, saved, likes} = this.state
-        const {id,friendProfileImage, friendName, postContent} = friendPost
+        const {friendProfileImage, friendName, postContent} = friendPost
         return(
-            <div className="post-container">
-                <div className="user-details-container">
-                    <img src={friendProfileImage} 
-                    className="post-profile-image" 
-                    alt="profileImage" 
+            <div className="specified-post-container">
+                <div className="specified-post-image-container">
+                    <img src={postContent} 
+                    className="specified-post-image" 
+                    alt="postImage"
                     />
-                    <p className="post-user-name">
-                        {friendName}
-                    </p>
-                    <div className="icon-conteiner right-align">
-                        <PopupHomepagePost />
-                    </div>
                 </div>
-                <img src={postContent} 
-                className="post-image" 
-                alt="postImage"
-                />
-                <div className="post-icons-container">
-                    <div className="icon-conteiner" role="button" tabIndex={0} onClick={this.changeLikeStatus}>
-                        {liked ? <Icon.HeartFill color="#ed4956" size={24} /> : <Icon.Heart color="#000000" size={24} />}
-                    </div>
-                    <Link to={`/posts/${id}`}>
-                        <div className="icon-conteiner">
-                            <Icon.Chat color="#000000" size={24} />
+                <div className="specified-post-user-content-container">
+                    <div className="specified-post-user-details-container">
+                        <img src={friendProfileImage} 
+                        className="specified-post-profile-image" 
+                        alt="profileImage" 
+                        />
+                        <p className="specified-post-user-name">
+                            {friendName}
+                        </p>
+                        <div className="specified-post-icon-conteiner specified-post-right-align">
+                            <PopupHomepagePost />
                         </div>
-                    </Link>
-                    <div className="icon-conteiner">
-                        <SendPostAsMessagePopup />
                     </div>
-                    <div className="icon-conteiner right-align" role="button" tabIndex={0} onClick={this.changeSavedStatus}>
-                        {saved ? <Icon.BookmarkFill color="#000000" size={24} /> : <Icon.Bookmark color="#000000" size={24} />}
-                    
+                    <div className="specified-post-text-content-container">
+                        {this.appendComments()}
                     </div>
+                    <footer className="specified-post-content-footer">
+                        <div className="specified-post-icons-container">
+                            <div className="specified-post-icon-container" role="button" tabIndex={0} onClick={this.changeLikeStatus}>
+                                {liked ? <Icon.HeartFill color="#ed4956" size={24} /> : <Icon.Heart color="#000000" size={24} />}
+                            </div>
+                            <div className="specified-post-icon-container">
+                            <Icon.Chat color="#000000" size={24} />
+                            </div>
+                            <div className="specified-post-icon-container">
+                                <SendPostAsMessagePopup />
+                            </div>
+                            <div className="specified-post-icon-container right-align" role="button" tabIndex={0} onClick={this.changeSavedStatus}>
+                                {saved ? <Icon.BookmarkFill color="#000000" size={24} /> : <Icon.Bookmark color="#000000" size={24} />}
+                            
+                            </div>
+                        </div>
+                        <div className="specified-post-likes-container">
+                            <p className="specified-post-likes-description">{likes} likes</p>
+                        </div>
+                        <div className="specified-post-time-container">
+                            <p className="specified-post-time">{this.displayPostTime()}</p>
+                        </div>
+                        <form className="specified-post-add-comment-section">
+                            <Icon.EmojiSmile color="#000000" size={24} />
+                            <textarea placeholder="Add a comment" type="text" className="specified-post-comment-input" onKeyDown={this.addComment} />
+                        </form>
+                    </footer>
                 </div>
-                <div className="text-content-container">
-                    <p className="post-description sub-heading-description">{likes} likes</p>
-                    {this.appendComments()}
-                    <p className="post-time">{this.displayPostTime()}</p>
-                </div>
-                <form className="add-comment-section">
-                    <Icon.EmojiSmile color="#000000" size={24} />
-                    <textarea placeholder="Add a comment" type="text" className="comment-input" onKeyDown={this.addComment} />
-                </form>
             </div>
         )
     }
 }
 
-export default OtherUserPost
+export default SpecifiedUserPost
