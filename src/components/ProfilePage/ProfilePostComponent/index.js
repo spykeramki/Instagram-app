@@ -1,5 +1,3 @@
-import {Link} from 'react-router-dom'
-
 import './index.css'
 
 const ProfilePostComponent = (props) => {
@@ -8,7 +6,7 @@ const ProfilePostComponent = (props) => {
     return(
         
         <li className="profile-page-post-item">
-            <Link to={`/posts/${postId}`}>
+            <a href={`/posts/${postId}`}>
                 <div className="profile-page-post" 
                     style={{backgroundImage: `url(${postImageUrl})`, 
                     backgroundSize: "cover",
@@ -16,7 +14,7 @@ const ProfilePostComponent = (props) => {
                     backgroundPosition:'center'}}>
                     
                 </div>
-            </Link>
+            </a>
         </li>
     )
 }

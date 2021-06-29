@@ -210,6 +210,8 @@ class OtherUserPost extends Component {
 
     appendComments = () =>{
         const{commentsList} = this.state
+        const{friendPost} = this.props
+        const{id} = friendPost
         const no_of_comments = commentsList.length
         let slicedArray = commentsList
         if (no_of_comments > 2){
@@ -217,7 +219,7 @@ class OtherUserPost extends Component {
         }
         return (
                 <>
-                    {no_of_comments>2 ?<p className="post-description view-all-comments comment-padding">View all {no_of_comments} comments</p>:''}
+                    {no_of_comments>2 ?<Link to={`/posts/${id}`} className="view-all-comments"><p className="post-description comment-padding">View all {no_of_comments} comments</p></Link>:''}
                     <ul className="comments-container">
                         {slicedArray.map(eachComment => {
                         return (
