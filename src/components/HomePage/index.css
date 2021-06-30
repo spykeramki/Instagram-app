@@ -9,7 +9,7 @@
     width: 60%;
     max-width: 600px;
     align-items: center;
-    margin-right: 32px;
+    margin: 96px 32px 0 0;
 }
 .friends-posts-container{
     list-style-type: none;

@@ -221,7 +221,7 @@ class SpecifiedUserPost extends Component {
 
     render(){
         const {friendPost, liked, saved, likes} = this.state
-        const {friendProfileImage, friendName, postContent} = friendPost
+        const {id, friendProfileImage, friendName, postContent} = friendPost
         return(
             <div className="specified-post-container">
                 <div className="specified-post-image-container">
@@ -240,7 +240,7 @@ class SpecifiedUserPost extends Component {
                             {friendName}
                         </p>
                         <div className="specified-post-icon-conteiner specified-post-right-align">
-                            <PopupHomepagePost />
+                            <PopupHomepagePost postId={id}/>
                         </div>
                     </div>
                     <div className="specified-post-text-content-container">

@@ -1,8 +1,10 @@
 import Popup from 'reactjs-popup'
 import * as Icon from 'react-bootstrap-icons'
+import {Link} from 'react-router-dom'
 import './index.css'
 
-const PopupHomepagePost = () => {
+const PopupHomepagePost = (props) => {
+    const {postId} = props
     return (
         <Popup 
         trigger={<Icon.ThreeDots color="#000000" size={16} />}
@@ -108,7 +110,7 @@ const PopupHomepagePost = () => {
                         </div>
                     </Popup>
                 <button className="home-page-post-option-red" tabIndex={0} type="button">Unfollow</button>
-                <button className="home-page-post-option" tabIndex={0} type="button">Go to post</button>
+                <Link to={`/posts/${postId}`}><button className="home-page-post-option" tabIndex={0} type="button">Go to post</button></Link>
                 <button className="home-page-post-option" tabIndex={0} type="button" onClick={close}>Cancel</button>
             </div>
             )}

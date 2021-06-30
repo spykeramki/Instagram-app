@@ -2,7 +2,7 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import OtherUserPost from '../OtherUserPost'
 import SuggestionsBox from '../SuggestionsBox'
-import StatusBar from '../StatusBar'
+// import StatusBar from '../StatusBar'
 import Header from '../Header'
 import CreatePostPopup from './CreatePostPopup'
 import './index.css'
@@ -79,7 +79,7 @@ class HomePage extends Component {
             <Header />
             <div className="home-bg-container">
                 <div className="status-posts-container">
-                    <StatusBar />
+                    {/* <StatusBar /> */}
                     <div className="create-post-container">
                         <div className="create-post-search-container">
                             <div className="create-post-image-container">

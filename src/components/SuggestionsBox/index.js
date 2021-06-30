@@ -25,7 +25,7 @@ class SuggestionsBox extends Component{
             const fetchedData = await response.json()
             const updatedData = fetchedData.data.map(eachItem => {
                 return {
-                    id: eachItem.id,
+                    id: eachItem.user_id,
                     friendProfileImage: eachItem.friend_profile_image,
                     friendPetName: eachItem.pet_name,
                     friendName: eachItem.friend_name

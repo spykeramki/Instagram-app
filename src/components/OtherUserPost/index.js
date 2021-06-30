@@ -245,7 +245,7 @@ class OtherUserPost extends Component {
                         {friendName}
                     </p>
                     <div className="icon-conteiner right-align">
-                        <PopupHomepagePost />
+                        <PopupHomepagePost  postId={id}/>
                     </div>
                 </div>
                 <img src={postContent} 
