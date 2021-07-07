@@ -7,7 +7,11 @@ const PopupHomepagePost = (props) => {
     const {postId} = props
     return (
         <Popup 
-        trigger={<Icon.ThreeDots color="#000000" size={16} />}
+        trigger={
+            <div className="icon-conteiner right-align">
+                <Icon.ThreeDots color="#000000" size={16} />
+                </div>
+        }
         className="home-page-more-options"
         modal
         nested

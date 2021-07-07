@@ -239,9 +239,7 @@ class OtherUserPost extends Component {
             <div className="post-container">
                 <div className="user-details-container">
                     <FriendProfileHoverPopup friendName={friendName} friendProfileImage={friendProfileImage} />
-                    <div className="icon-conteiner right-align">
                         <PopupHomepagePost  postId={id}/>
-                    </div>
                 </div>
                 <img src={postContent} 
                 className="post-image" 
