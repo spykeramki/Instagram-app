@@ -6,6 +6,7 @@ import moment from 'moment'
 import PopupHomepagePost from './PopupHomepagePost'
 import SendPostAsMessagePopup from './SendPostAsMessagePopup'
 import './index.css';
+import FriendProfileHoverPopup from './FriendProfileHoverPopup';
 
 class OtherUserPost extends Component {
     constructor(props){
@@ -237,13 +238,7 @@ class OtherUserPost extends Component {
         return(
             <div className="post-container">
                 <div className="user-details-container">
-                    <img src={friendProfileImage} 
-                    className="post-profile-image" 
-                    alt="profileImage" 
-                    />
-                    <p className="post-user-name">
-                        {friendName}
-                    </p>
+                    <FriendProfileHoverPopup friendName={friendName} friendProfileImage={friendProfileImage} />
                     <div className="icon-conteiner right-align">
                         <PopupHomepagePost  postId={id}/>
                     </div>

@@ -34,8 +34,8 @@ class ChatPage extends Component {
                     {selectedFriendId !== null ? <FriendChat /> : (
                         <div className="chat-intro-container">
                         <div className="intro-send-image-container">
-                            <img src="https://res.cloudinary.com/dwlftsdge/image/upload/v1621783591/Instagram%20App/How-to-repost-an-Instagram-Story2_emasoz.jpg" 
-                            className="intro-send-image" 
+                            <img src="./images/chatInitiateIcon.png" 
+                            className="intro-send-image-width" 
                             alt="intro-send"
                             />
                         </div>

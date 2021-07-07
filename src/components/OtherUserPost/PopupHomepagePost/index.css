@@ -1,12 +1,16 @@
 .home-page-more-options-overlay{
     background-color: #000000a1 !important;
 }
+.home-page-more-options-report-content {
+    background-color: transparent;
+  }
 .home-page-post-options-container{
     display: flex;
     flex-direction: column;
     width: 400px;
     border-radius: 12px;
     overflow: hidden;
+    background-color: #ffffff;
 }
 .home-page-post-option-red{
     border:0;
