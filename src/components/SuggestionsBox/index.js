@@ -32,7 +32,6 @@ class SuggestionsBox extends Component{
                 }
             })
             this.setState({suggestionsList: updatedData})
-            console.log(fetchedData)
         }
     }
 

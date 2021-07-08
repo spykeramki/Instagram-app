@@ -13,7 +13,7 @@ class CreatePostPopup extends Component {
             this.setState({image:event.target.files[0]})
         }
     }
-
+    
     handleUpload = () => {
         const {image, postDescription, postPrivacy} = this.state
         const jwtToken = Cookies.get('jwt_token')
@@ -60,58 +60,88 @@ class CreatePostPopup extends Component {
     }
     }
 
+    uploadButtonComponent = () => {
+        return (
+            <button className="create-post-image-select-container">
+                <div className="create-post-icon-container">
+                    <Icon.ImageFill color='#ffffff' size={24} />
+                </div>
+                <p className="create-post-image-upload-title">Upload</p>
+            </button>
+        )
+    }
+
+    renderPopupHeader = (close) => {
+        return (
+            <div className="create-post-popup-header-container">
+                <p className="create-post-popup-anchor"></p>
+                <h1 className="create-post-popup-heading">Create Post</h1>
+                <div className="create-post-popup-close-icon-container" role="button" tabIndex={0} onClick={close}>
+                    <Icon.XLg color='#262626' size={16} />
+                </div>
+            </div>
+        )
+    }
+
+    renderLoginUserDetails = () => {
+        return(
+            <div className="create-post-popup-suggested-friend" key={0}>
+                <div className="create-post-popup-suggested-friend-image-container">
+                    <img src='https://res.cloudinary.com/dwlftsdge/image/upload/v1620653719/Instagram%20App/download_mqntpw.jpg' 
+                    className="create-post-popup-suggested-friend-image" 
+                    alt="profile" />
+                </div>
+                <div className="create-post-popup-suggested-friend-name-container">
+                    <p className="create-post-popup-suggested-friend-nick-name">
+                        spykeramki
+                    </p>
+                    <select className="create-post-popup-suggested-friend-name">
+                        <option value="public">Public</option>
+                        <option value="friends">Friends</option>
+                        <option value="only me">Only me</option>
+                    </select>
+                </div>
+            </div>
+        )
+    }
+
+    renderSelectFileComponent = () => {
+        return (
+            <div className="create-post-popup-choose-file-container">
+                <label className="create-post-popup-choose-file-styling" htmlFor="postInput">
+                    <input id='postInput' type="file" className="create-post-popup-choose-file-input" onChange={this.handleChange} />
+                    Select Image
+                </label>
+                <textarea className="create-post-popup-post-description" placeholder="Describe your feeling.."></textarea>
+            </div>
+        )
+    }
+
+    renderPostButtonComponent = (close) => {
+        return(
+            <div className="create-post-popup-post-button-container">
+                <button className="create-post-popup-post-button1" type="button" 
+                onClick={(event) => {this.handleUpload(event); close()}}>
+                    Post
+                </button>
+            </div>
+        )
+    }
+
     render(){
         return (
             <Popup 
-            trigger={<button className="create-post-image-select-container">
-                    <div className="create-post-icon-container">
-                        <Icon.ImageFill color='#ffffff' size={24} />
-                    </div>
-                    <p className="create-post-image-upload-title">Upload</p>
-                </button>}
+            trigger={this.uploadButtonComponent()}
             className="create-post-popup"
             modal
             nested
             >
                 {close => (
                 <div className="create-post-popup-container">
-                    <div className="create-post-popup-header-container">
-                        <p className="create-post-popup-anchor"></p>
-                        <h1 className="create-post-popup-heading">Create Post</h1>
-                        <div className="create-post-popup-close-icon-container" role="button" tabIndex={0} onClick={close}>
-                            <Icon.XLg color='#262626' size={16} />
-                        </div>
-                    </div>
-                    <div className="create-post-popup-suggested-friend" key={0}>
-                        <div className="create-post-popup-suggested-friend-image-container">
-                            <img src='https://res.cloudinary.com/dwlftsdge/image/upload/v1620653719/Instagram%20App/download_mqntpw.jpg' 
-                            className="create-post-popup-suggested-friend-image" 
-                            alt="profile" />
-                        </div>
-                        <div className="create-post-popup-suggested-friend-name-container">
-                            <p className="create-post-popup-suggested-friend-nick-name">
-                                spykeramki
-                            </p>
-                            <select className="create-post-popup-suggested-friend-name">
-                                <option value="public">Public</option>
-                                <option value="friends">Friends</option>
-                                <option value="only me">Only me</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="create-post-popup-choose-file-container">
-                        <label className="create-post-popup-choose-file-styling" htmlFor="postInput">
-                            <input id='postInput' type="file" className="create-post-popup-choose-file-input" onChange={this.handleChange} />
-                            Select Image
-                        </label>
-                        <textarea className="create-post-popup-post-description" placeholder="Describe your feeling.."></textarea>
-                    </div>
-                    <div className="create-post-popup-post-button-container">
-                        <button className="create-post-popup-post-button1" type="button" 
-                        onClick={(event) => {this.handleUpload(event); close()}}>
-                            Post
-                        </button>
-                    </div>
+                    {this.renderPopupHeader(close)}
+                    {this.renderLoginUserDetails()}
+                    {this.renderSelectFileComponent()}
+                    {this.renderPostButtonComponent(close)}
                 </div>
                 )}
             </Popup>

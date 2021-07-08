@@ -16,7 +16,6 @@
     margin: 32px;
 }
 .login-phone-image-container{
-    background-image: url('https://res.cloudinary.com/dwlftsdge/image/upload/v1622135402/Instagram%20App/instagram%20login%20page%20images/9364675fb26a_beeizs.png');
     width: 448px;
     height: 620px;
     background-size: cover;
@@ -43,10 +42,12 @@
     margin: 8px 0;
 }
 .login-form-logo-container{
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 .login-form-logo{
-    height: 110px;
+    max-height: 110px;
 }
 .login-input-container{
     margin-bottom: 6px;

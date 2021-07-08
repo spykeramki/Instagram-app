@@ -108,7 +108,7 @@ class LoginPage extends Component {
     renderLoginPageImage = () => {
         const {mobileImage} = this.state
         return (
-            <div className="login-phone-image-container">
+            <div className="login-phone-image-container" style={{backgroundImage: "url('./images/loginPageImage.png')"}}>
                 <div className="login-gif-image-container">
                     <img src={mobileImage} className="login-gif-image" alt="instagram" />
                 </div>
