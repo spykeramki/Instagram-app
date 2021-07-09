@@ -27,7 +27,7 @@
     flex-direction: column;
 }
 .specified-post-user-details-container{
-    padding: 16px 16px;
+    padding: 20px 8px;
     min-height: 10%;
     display: flex;
     flex-direction: row;
@@ -103,9 +103,6 @@
 }
 .specified-post-comment-value{
     font-weight: normal;
-}
-.specified-post-comment-padding{
-    margin-bottom: 4px;
 }
 
 .specified-post-add-comment-section{

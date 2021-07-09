@@ -5,8 +5,9 @@ import Cookies from 'js-cookie'
 import moment from 'moment'
 import PopupHomepagePost from './PopupHomepagePost'
 import SendPostAsMessagePopup from './SendPostAsMessagePopup'
-import './index.css';
 import FriendProfileHoverPopup from './FriendProfileHoverPopup';
+
+import './index.css';
 
 class OtherUserPost extends Component {
     constructor(props){
@@ -14,22 +15,21 @@ class OtherUserPost extends Component {
         this.state = {
             friendPost:props.friendPost, 
             commentsList:[], 
-            ostCreatedTime:'now', 
             liked:false, 
             likes:props.friendPost.likes, 
             saved:false
         }
     }
 
-    changeSavedStatus = async () => {
-        const{friendPost} = this.props
-        const{id} = friendPost
+    getFormattedTodayDate = () => {
+        const presentDate = new Date();
+        const formattedDate = `${presentDate.getFullYear()}-${presentDate.getMonth() + 1}-${presentDate.getDate()} ${presentDate.getHours()}:${presentDate.getMinutes()}:${presentDate.getSeconds()}`;
+        console.log(formattedDate)
+        return formattedDate
+    }
+
+    postApiCall = async (url, bodyDetails) => {
         const jwtToken = Cookies.get('jwt_token');
-        const presentDate = new Date()
-        const savedPostDetails = {
-            savedTime : `${presentDate.getFullYear()}-${presentDate.getMonth() + 1}-${presentDate.getDate()} ${presentDate.getHours()}:${presentDate.getMinutes()}:${presentDate.getSeconds()}`
-        }
-        
         const options={
             method: 'POST',
             headers: {
@@ -37,16 +37,26 @@ class OtherUserPost extends Component {
                 "Accept": 'application/json',
                 authorization: `Bearer ${jwtToken}`,
             },
-            body: JSON.stringify(savedPostDetails)
+            body: JSON.stringify(bodyDetails)
         }
-        const response = await fetch(`http://localhost:3005/home/posts/${id}/saved`, options)
+        const response = await fetch(url, options)
         if (response.ok===true){ 
-            console.log("save success")
+            console.log("success")
         }
         else {
-            console.log('save failure')
+            console.log('failure')
             
         }
+    }
+
+    changeSavedStatus = async () => {
+        const{friendPost} = this.props
+        const{id} = friendPost
+        const savedPostDetails = {
+            savedTime : this.getFormattedTodayDate()
+        }
+        const url = `http://localhost:3005/home/posts/${id}/saved`
+        await this.postApiCall(url, savedPostDetails)
         this.setState(prevState => {
             return {saved: !prevState.saved}
         })
@@ -55,9 +65,8 @@ class OtherUserPost extends Component {
     updateLikes =async () => {
         const{friendPost} = this.props
         const{id} = friendPost
-        const jwtToken = Cookies.get('jwt_token');
-        const presentDate = new Date()
         const {liked} = this.state
+        const url = `http://localhost:3005/home/posts/${id}/likes`
         if (liked){
             this.setState(prevState => {
                 return {likes: prevState.likes-1}
@@ -69,33 +78,13 @@ class OtherUserPost extends Component {
             })
         }
         const likeDetails = {
-            likedTime : `${presentDate.getFullYear()}-${presentDate.getMonth() + 1}-${presentDate.getDate()} ${presentDate.getHours()}:${presentDate.getMinutes()}:${presentDate.getSeconds()}`
+            likedTime : this.getFormattedTodayDate()
         }
         
-        const options={
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": 'application/json',
-                authorization: `Bearer ${jwtToken}`,
-            },
-            body: JSON.stringify(likeDetails)
-        }
-        const response = await fetch(`http://localhost:3005/home/posts/${id}/likes`, options)
-        if (response.ok===true){ 
-            console.log("like success")
-        }
-        else {
-            console.log('like failure')
-            
-        }
+        await this.postApiCall(url, likeDetails)
         this.setState(prevState => {
             return {liked: !prevState.liked}
         })
-    }
-
-    changeLikeStatus = () => {
-        this.updateLikes()
     }
 
     displayPostTime = () => {
@@ -106,41 +95,32 @@ class OtherUserPost extends Component {
         const displayTime = (moment(timeString).fromNow()).toUpperCase()
         return displayTime
     }
+
+    updateStateWithNewComment = (commentText) => {
+        const{friendPost, commentsList} = this.state
+        const updatedCommentList = commentsList
+        const comment={
+            id: updatedCommentList.length + 1,
+            commenters: friendPost.user,
+            comment: commentText,
+        }
+        updatedCommentList.push(comment)
+        this.setState({commentsList:updatedCommentList})
+    }
     
     addComment = async (event) => {
-        const{friendPost,commentsList} = this.state
+        const{friendPost} = this.state
         const{id} = friendPost
-        const jwtToken = Cookies.get('jwt_token');
-        const presentDate = new Date()
-        const updatedCommentList = commentsList
+        const url = `http://localhost:3005/home/posts/${id}/comments`
         if (event.key==="Enter"){
-            //write API call to add comment in database
             const commentDetails = {
                 comment: event.target.value,
-                commentedTime:`${presentDate.getFullYear()}-${presentDate.getMonth() + 1}-${presentDate.getDate()} ${presentDate.getHours()}:${presentDate.getMinutes()}:${presentDate.getSeconds()}`
+                commentedTime: this.getFormattedTodayDate()
             }
-            
-            const options={
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": 'application/json',
-                    authorization: `Bearer ${jwtToken}`,
-                },
-                body: JSON.stringify(commentDetails)
-            }
-            const response = await fetch(`http://localhost:3005/home/posts/${id}/comments`, options)
-            if (response.ok===true){ 
-                const comment={
-                    id: updatedCommentList.length + 1,
-                    commenters: friendPost.user,
-                    comment: event.target.value,
-                }
-                updatedCommentList.push(comment)
-                this.setState({commentsList:updatedCommentList})
-                event.target.value=""
-            }
-            
+            await this.postApiCall(url, commentDetails)
+             
+            this.updateStateWithNewComment(event.target.value)
+            event.target.value=""
         }
     }
 
@@ -152,9 +132,7 @@ class OtherUserPost extends Component {
         this.isPostSaved()
     }
 
-    getCommentsList = async () => {
-        const{friendPost} = this.props
-        const{id} = friendPost
+    getApiCall = async (url) => {
         const jwtToken = Cookies.get('jwt_token');
         const options = {
             method: "GET",
@@ -164,53 +142,40 @@ class OtherUserPost extends Component {
                 authorization: `Bearer ${jwtToken}`,
             },
         }
-        const response = await fetch(`http://localhost:3005/home/posts/${id}/comments`, options);
+        const response = await fetch(url, options);
         if (response.ok===true){
             const dataFetched=await response.json()
-            this.setState({commentsList: dataFetched.data})
+            return dataFetched
         }
+    }
+
+    getCommentsList = async () => {
+        const{friendPost} = this.props
+        const{id} = friendPost
+        const url = `http://localhost:3005/home/posts/${id}/comments`
+        const dataFetched=await this.getApiCall(url)
+        this.setState({commentsList: dataFetched.data})
     }
 
     isPostLiked = async () => {
         const{friendPost} = this.props
         const{id} = friendPost
-        const jwtToken = Cookies.get('jwt_token');
-        const options = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": 'application/json',
-                authorization: `Bearer ${jwtToken}`,
-            },
-        }
-        const response = await fetch(`http://localhost:3005/home/post/${id}/liked`, options);
-        if (response.ok===true){
-            const dataFetched=await response.json()
-            this.setState({liked: dataFetched.liked})
-        }
+        const url = `http://localhost:3005/home/post/${id}/liked`
+        const dataFetched=await this.getApiCall(url)
+        this.setState({liked: dataFetched.liked})
+        
     }
 
     isPostSaved = async () => {
         const{friendPost} = this.props
         const{id} = friendPost
-        const jwtToken = Cookies.get('jwt_token');
-        const options = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": 'application/json',
-                authorization: `Bearer ${jwtToken}`,
-            },
-        }
-        const response = await fetch(`http://localhost:3005/home/post/${id}/saved`, options);
-        if (response.ok===true){
-            const dataFetched=await response.json()
-            this.setState({saved: dataFetched.saved})
-        }
+        const url = `http://localhost:3005/home/post/${id}/saved`
+        const dataFetched=await this.getApiCall(url)
+        this.setState({saved: dataFetched.saved})
     }
 
-    appendComments = () =>{
-        const{commentsList} = this.state
+    renderComments = () =>{
+        const{commentsList, likes} = this.state
         const{friendPost} = this.props
         const{id} = friendPost
         const no_of_comments = commentsList.length
@@ -219,7 +184,8 @@ class OtherUserPost extends Component {
             slicedArray = commentsList.slice(no_of_comments-2,no_of_comments)
         }
         return (
-                <>
+                <div className="text-content-container">
+                    <p className="post-description sub-heading-description">{likes} likes</p>
                     {no_of_comments>2 ?<Link to={`/posts/${id}`} className="view-all-comments"><p className="post-description comment-padding">View all {no_of_comments} comments</p></Link>:''}
                     <ul className="comments-container">
                         {slicedArray.map(eachComment => {
@@ -228,49 +194,61 @@ class OtherUserPost extends Component {
                         )
                         })}     
                     </ul>
-                </>
+                    <p className="post-time">{this.displayPostTime()}</p>
+                </div>
             )
     }
 
+    renderPostIcons = () => {
+        const {friendPost, liked, saved} = this.state
+        const{id} = friendPost
+        return(
+            <div className="post-icons-container">
+                <div className="icon-conteiner" role="button" tabIndex={0} onClick={this.updateLikes}>
+                    {liked ? <Icon.HeartFill color="#ed4956" size={24} /> : <Icon.Heart color="#000000" size={24} />}
+                </div>
+                <Link to={`/posts/${id}`}>
+                    <div className="icon-conteiner">
+                        <Icon.Chat color="#000000" size={24} />
+                    </div>
+                </Link>
+                <div className="icon-conteiner">
+                    <SendPostAsMessagePopup />
+                </div>
+                <div className="icon-conteiner right-align" role="button" tabIndex={0} onClick={this.changeSavedStatus}>
+                    {saved ? <Icon.BookmarkFill color="#000000" size={24} /> : <Icon.Bookmark color="#000000" size={24} />}
+                
+                </div>
+            </div>
+        )
+    }
+
+    renderAddComment  = () => {
+        return (
+            <form className="add-comment-section">
+                <Icon.EmojiSmile color="#000000" size={24} />
+                <textarea placeholder="Add a comment" type="text" className="comment-input" onKeyDown={this.addComment} />
+            </form>
+        )
+    }
+
     render(){
-        const {friendPost, liked, saved, likes} = this.state
+        const {friendPost} = this.state
         const {id,friendProfileImage, friendName, postContent} = friendPost
         return(
             <div className="post-container">
                 <div className="user-details-container">
                     <FriendProfileHoverPopup friendName={friendName} friendProfileImage={friendProfileImage} />
-                        <PopupHomepagePost  postId={id}/>
+                    <PopupHomepagePost  postId={id}/>
                 </div>
-                <img src={postContent} 
-                className="post-image" 
-                alt="postImage"
-                />
-                <div className="post-icons-container">
-                    <div className="icon-conteiner" role="button" tabIndex={0} onClick={this.changeLikeStatus}>
-                        {liked ? <Icon.HeartFill color="#ed4956" size={24} /> : <Icon.Heart color="#000000" size={24} />}
-                    </div>
-                    <Link to={`/posts/${id}`}>
-                        <div className="icon-conteiner">
-                            <Icon.Chat color="#000000" size={24} />
-                        </div>
-                    </Link>
-                    <div className="icon-conteiner">
-                        <SendPostAsMessagePopup />
-                    </div>
-                    <div className="icon-conteiner right-align" role="button" tabIndex={0} onClick={this.changeSavedStatus}>
-                        {saved ? <Icon.BookmarkFill color="#000000" size={24} /> : <Icon.Bookmark color="#000000" size={24} />}
+                
+                <img src={postContent} className="post-image" alt="postImage" />
+
+                {this.renderPostIcons()}
+                
+                {this.renderComments()}
                     
-                    </div>
-                </div>
-                <div className="text-content-container">
-                    <p className="post-description sub-heading-description">{likes} likes</p>
-                    {this.appendComments()}
-                    <p className="post-time">{this.displayPostTime()}</p>
-                </div>
-                <form className="add-comment-section">
-                    <Icon.EmojiSmile color="#000000" size={24} />
-                    <textarea placeholder="Add a comment" type="text" className="comment-input" onKeyDown={this.addComment} />
-                </form>
+                {this.renderAddComment()}
             </div>
         )
     }

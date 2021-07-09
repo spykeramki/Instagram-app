@@ -42,7 +42,6 @@ class SpecifiedUserPostDetailedPage extends Component{
                 friendPostTime: dataFetched.data.friend_post_time,
                 user:dataFetched.data.user
             }
-            console.log(updatedData)
             this.setState({friendPost: updatedData, loading:false, friendPetName:updatedData.petName})
         }
     }
@@ -77,7 +76,6 @@ class SpecifiedUserPostDetailedPage extends Component{
 
     render(){
         const {friendPost, loading, otherPostsList, friendPetName} = this.state
-        console.log(friendPost)
         return(
             <>
             <Header />

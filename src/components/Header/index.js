@@ -34,7 +34,7 @@ class Header extends Component {
             <div className="header-bg-container">
                 <nav className="header-container">
                     <Link className="nav-link" to='/'>
-                        <img src="./images/instagramLogo.png" className="logo" alt="logo" />
+                        <img src="../images/instagramLogo.png" className="logo" alt="logo" />
                     </Link>
                     <SearchInputPopup />
                     {this.renderNavLinks()}

@@ -3,20 +3,25 @@ import Popup from 'reactjs-popup';
 import './index.css'
 
 class FriendProfileHoverPopup extends Component{
-    render(){
+
+    renderPostUserDetails = () => {
         const {friendName, friendProfileImage} = this.props
+        return (
+            <div className="flex flex-row items-center">
+                <img src={friendProfileImage} 
+                        className="post-profile-image" 
+                        alt="profileImage" 
+                        />
+                <p className="post-user-name">{friendName}</p>
+            </div>
+        )
+    }
+
+    render(){
         return(
             <Popup 
         className="friend-profile-hover-popup"
-        trigger={
-            <div className="flex flex-row items-center">
-            <img src={friendProfileImage} 
-                    className="post-profile-image" 
-                    alt="profileImage" 
-                    />
-            <p className="post-user-name">{friendName}</p>
-            </div>
-        }
+        trigger={this.renderPostUserDetails()}
         position='bottom left'
         on={['hover', 'focus']}
         arrow={false}

@@ -1,10 +1,11 @@
 .chats-page-bg-container{
-    padding: 20px;
+    padding: 90px 20px 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height:92vh;
+    height:100vh;
+    background-color: #fafafa;
 }
 .chats-container{
     max-width: 935px;
@@ -22,6 +23,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    background-color: #ffffff;
 }
 .intro-send-image-container{
     height: 100px;

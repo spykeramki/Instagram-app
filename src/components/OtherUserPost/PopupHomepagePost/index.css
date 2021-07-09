@@ -38,6 +38,10 @@
     justify-content: space-between;
     align-items: center;
 }
+.home-page-post-selected-question-statements{
+    list-style-type: none;
+    padding: 0;
+}
 .home-page-post-selected-option{
     margin: 4px;
 }
